@@ -1,0 +1,208 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREAMBLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% sets the base layout
+% this class is an extension of examdoc
+\documentclass{source/quiz}
+
+% packages already loaded in the class:
+% (default)         geometry, iftex, paracol
+% (XeTeX or LuaTeX) fontspec, unicode-math 
+% (other compilers) inputenc, newtxtest, newtxmath
+%
+% include the following packages
+\usepackage{amsmath,mathtools}       % for useful macros and shortcuts
+%\usepackage{siunitx}                 % for SI Unit macros
+%\usepackage{textcomp,gensymb}        % symbols like degrees, celcius, ...
+%\usepackage{tikz,pgfplots}           % for drawing graphs and diagrams
+
+% set the name of the quiz
+\title{Example Quiz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT STARTS HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% all content should go below here
+\begin{document}
+
+% display the name of the quiz and draw spaces for student name and total marks
+% note: the marks shown here is the sum of all marks given in the questions and parts below
+\maketitle
+
+% put any instructions, guides, etc. here
+% use two line-breaks to make a new paragraph
+You can use a scientific calculator to solve the questions.
+
+Time given: 15 minutes.
+Good luck!
+
+% questions start here
+\begin{questions}
+
+% make a new question
+% usage: \question instructions
+\question What is the coefficient of $x$ in $x^2 - x + 2$?
+
+% you can also assign a mark for the question.
+% put \droppoints at the end of the sentence to display the marks. Otherwise they are only internally used.
+% usage: \question[marks-for-question] instructions \droppoints
+\question[2] Collect the like terms for $x^2 + 3x - 2x - 7$.
+\question[2] Expand $3(x^2-2x)$. \droppoints
+
+% put a vertical space between questions using \vspace{length}
+% you can put lengths in px, cm, mm, in, em.
+% if you want equal spacing between questions, use \vspace{\stretch{1}}
+% the number inside \stretch determines the relative spacing between the questions
+\question[4] Expand and simplify $(x+2)(x+3)-x^2$. \droppoints
+\vspace{2cm}
+
+\question[4] Simplify this algebraic fraction: $\dfrac{2(x+3)(x-2)}{x-2}$. \droppoints
+\vspace{\stretch{1}}
+
+\question[4] Fully factorise $x^2 - 5x + 6$. \droppoints
+\vspace{\stretch{1}}
+
+% insert a page break with \newpage (same as Ctrl + Enter in Word)
+\newpage
+
+% make a multiple-choice question with the following syntax.
+% \begin{choices}
+%     \choice option
+%     ...
+% \end{choices}
+\question[1] Which expression is equal to $x^2 - x$?
+\begin{choices}
+    \choice $x(x+1)$
+    \choice $x(x-1)$
+    \choice $x^2 - 2x - x$
+    \choice $x^2 + 2x - x$
+\end{choices}
+\vspace{1cm}
+
+% put the choices into a single line
+% usage: \begin{oneparchoices} ... \end{oneparchoices}
+\question[1] If you expand $(2x-1)(x+3)$, what will be the coefficient of $x$?
+\vspace{0.5cm}
+
+\begin{oneparchoices}
+    \choice -6
+    \choice -3
+    \choice 5
+    \choice 6
+\end{oneparchoices}
+\vspace{1cm}
+
+% make parts of a question
+% insert vertical space using \vspace
+% \begin{parts}
+%     \part instruction
+%     ...
+% \end{parts}
+\question[4] Simplify: \droppoints
+\begin{parts}
+    \part $\dfrac{3x}{x}$
+    \vspace{1cm}
+    \part $\dfrac{3x^2y}{12y^3}$
+    \vspace{1cm}
+\end{parts}
+
+% you can also assign marks for each part.
+% note: don't put any marks for the question as they will be counted twice
+%       (\question[3] \part[2] \part[1] is worth 6 marks)
+% note: use \droptotalpoints instead of \droppoints to add up the marks of the parts
+\question Use index laws to simplify the following. \droptotalpoints
+\vspace{1cm}
+\begin{parts}
+    \part[3] $x^2 y^3 \times x y^2 z^3 \times x^5 z^2$ \droppoints
+    \vspace{1cm}
+    \part[4] $\dfrac{x^{10} y^{12}}{x^3 y^{-2}}$ \droppoints 
+    \vspace{1cm}
+\end{parts}
+
+% put parts across multiple columns
+% usage: \begin{mcparts}[number-of-columns]
+%            \part \instruction
+%            ...
+%        \end{mcparts}
+% note: this is a custom macro.
+% note: compatible with \droppoints, but the margins become weird
+\question[6] Simplify: \droptotalpoints
+\begin{mcparts}[2]
+    \part $3a + 8a$
+    \part $5x + 2x + 4x$
+    \vspace{2cm}
+    \part $4y-3y+8$
+    \part $7x+5-4x$
+    \vspace{2cm}
+    \part $2-5m-m$
+    \part $y^2+2y+3y-1$
+\end{mcparts}
+
+\newpage
+
+% insert an image
+% usage: \insertimage[width=...]{address-to-file}
+% note: this is a custom macro.
+%       the LaTeX default is \includegraphics[options]{address-to-file}
+\question[1] What is the most specific name of this shape? \droppoints
+
+\insertimage[]{fig/example-pic1}
+\vspace{1cm}
+
+% insert an image on the right side
+% usage: \insertimageonright[width=...]{address-to-file}
+% note: the text will not wrap around the image, so be careful about it.
+\question For the diagram below, \droptotalpoints
+
+\insertimageonright[]{fig/example-pic1}
+\begin{parts}
+    \part[1] find $x$.
+    \vspace{2cm}
+    \part[2] find the angle opposite the side that is 15 cm long.
+    \vspace{2cm}
+\end{parts}
+
+% specify the answers to the questions
+% usage: \begin{answer} ... \end{answer}
+% put \showallanswers at the end of the document
+%   to print the answers to the questions on the last page.
+% note: this is a custom macro.
+\question[2] Rationalise the denominator of $\dfrac{2}{\sqrt{1+x}}$, where $x \ge -1$. \droppoints
+\begin{answer}
+$\dfrac{2 \sqrt{x+1}}{x+1}$
+\end{answer}
+\vspace{1cm}
+
+\question Which one of those cannot be simplified as a multiple of $\sqrt{2}$?
+\begin{choices}
+    \choice $\sqrt{8}$
+    \choice $\sqrt{12}$
+    \choice $\sqrt{18}$
+    \choice $\sqrt{50}$
+\end{choices}
+\begin{answer}
+B
+\end{answer}
+\vspace{1cm}
+
+% the answer environment works per question, not per part
+\question Fully factorise: \droptotalpoints
+\begin{mcparts}[2]
+    \part[3] $x^2 + 3x + 2$ \vspace{1cm}
+    \part[2] $2x^2 - 14x + 20$
+    \part[4] $2x^2 - x - 1$
+\end{mcparts}
+\begin{answer}
+(a) $(x+1)(x+2)$
+(b) $2(x-2)(x-5)$
+(c) $(2x+1)(x-1)$
+\end{answer}
+
+% questions end here
+\end{questions}
+% place the note at the bottom right of the current page
+% you can change the content inside { ... }
+\vfill\flushright{ \textbf{END OF QUIZ} }
+% reference to the last page of the quiz to count the number of pages
+\label{lastpage}
+% remove this command if you don't want to print the answers
+\showallanswers
+
+% all content should be placed above here
+\end{document}
