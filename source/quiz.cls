@@ -11,8 +11,6 @@
 \pagenumbering{arabic}
 
 % load necessary packages
-\RequirePackage{tikz}               % drawing figures
-    \usetikzlibrary{calc}
 
 \RequirePackage{geometry}           % margin control
 % set the geometry of the paper
@@ -308,25 +306,6 @@
     \restartlist{subparts}\item%
 }
 
-% parts divided in multiple columns
-\newcommand\update@print@points@mcparts[1]{%
-    \update@points{#1}%
-    \hspace*{\fill}\mbox{[#1]}%
-    \par%
-}
-\newenvironment{mcparts}[1][2]{%
-    \renewcommand*{\points}{ \@ifstar\update@points\update@print@points@mcparts }
-    \setlength{\columnsep}{0pt}%
-    \begin{paracol}{#1}%
-    \begin{parts}%
-    \NewCommandCopy{\originalpart}{\part}%
-    \renewcommand{\part}{ \do@ifmultipleof{#1}{\arabic{partsi}}{\switchcolumn*}{\switchcolumn} \originalpart }%
-    \switchcolumn[\numexpr #1 - 1]%
-    }%
-    {\end{parts}%
-    \end{paracol}%
-}
-
 %% subparts environment
 \newlist{subparts}{enumerate}{1}
 \setlist[subparts]{
@@ -345,6 +324,43 @@
 % subpart
 \def\subpart{%
     \item%
+}
+
+% parts and subparts divided in multiple columns
+% move the points inside the columns
+\newcommand\update@print@points@mcparts[1]{%
+    \update@points{#1}%
+    \hspace*{\fill}\mbox{[#1]}%
+    \par%
+}
+% define mcparts
+% \begin{mcparts}[no of columns] ... \end{mcparts}
+\newenvironment{mcparts}[1][2]{%
+    \renewcommand*{\points}{ \@ifstar\update@points\update@print@points@mcparts }
+    \setlength{\columnsep}{0pt}%
+    \begin{paracol}{#1}%
+    \begin{parts}%
+    \NewCommandCopy{\originalpart}{\part}%
+    \renewcommand{\part}{ \do@ifmultipleof{#1}{\arabic{partsi}}{\switchcolumn*}{\switchcolumn} \originalpart }%
+    \switchcolumn[\numexpr #1 - 1]%
+    }%
+    {\end{parts}%
+    \end{paracol}%
+}
+
+% define mcsubparts
+% \begin{mcsubparts}[no of columns] ... \end{mcsubparts}
+\newenvironment{mcsubparts}[1][2]{%
+    \renewcommand*{\points}{ \@ifstar\update@points\update@print@points@mcparts }
+    \setlength{\columnsep}{0pt}%
+    \begin{paracol}{#1}%
+    \begin{subparts}%
+    \NewCommandCopy{\originalsubpart}{\subpart}%
+    \renewcommand{\subpart}{ \do@ifmultipleof{#1}{\arabic{subpartsi}}{\switchcolumn*}{\switchcolumn} \originalsubpart }%
+    \switchcolumn[\numexpr #1 - 1]%
+    }%
+    {\end{subparts}%
+    \end{paracol}%
 }
 
 %% choices environment
@@ -373,7 +389,7 @@
     \item%
 }
 
-% continue counting in paracols
+% prevent resetting part and subpart labels inside paracols
 \globalcounter*
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HEADERS AND FOOTERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -415,7 +431,7 @@
 \renewcommand{\tfrac}[2]{\genfrac{}{}{}{1}{\textstyle{#1}}{\textstyle{#2}}}
 
 % insert image in the middle
-% usage: \insertimage[width=2cm]{fig/image-name}
+% usage: \insertimage[options]{fig/image-name}
 \newcommand\insertimage[2][width=5cm]{%
     \begin{center}%
         \includegraphics[#1]{#2}%
@@ -424,15 +440,9 @@
 
 % insert image on the right end 
 % source: https://tex.stackexchange.com/questions/165691/placing-figures-adjacent-to-exam-choices
-% usage: \insertimageonright[width=2cm]{fig/image-name}
+% usage: \insertimageonright[options]{fig/image-name}
 \newcommand\insertimageonright[2][width=2cm]{%
     \hfill\makebox[0pt][r]{\raisebox{-\height}[0pt][0pt]{\includegraphics[#1]{#2}}}%
 }
-
-% parts divided in multiple columns
-% usage: \begin{mcparts}[no-of-columns]
-%            \part ...
-%            \part ...
-%        \end{mcparts}
 
 

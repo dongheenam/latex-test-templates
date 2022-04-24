@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREAMBLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % sets the base layout
-% this class is an extension of examdoc
+% this class is an extension of article
 \documentclass{source/quiz}
 
 % packages already loaded in the class:
-% (default)         geometry, iftex, paracol
+% (default)         geometry, [inline]enumitem, fancyhdr, iftex, paracol
 % (XeTeX or LuaTeX) fontspec, unicode-math 
 % (other compilers) inputenc, newtxtest, newtxmath
 %
@@ -13,12 +13,13 @@
 %\usepackage{siunitx}                 % for SI Unit macros
 %\usepackage{textcomp,gensymb}        % symbols like degrees, celcius, ...
 %\usepackage{tikz,pgfplots}           % for drawing graphs and diagrams
-\usepackage{lipsum}
-
-\sectionresetsquestion
 
 % set the name of the quiz
 \title{Example Quiz}
+
+% default behaviour is that exam sections do not reset the question numbers
+% \sectionresetsquestion makes every section starts with Question 1
+%\sectionresetsquestion
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT STARTS HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % all content should go below here
@@ -35,14 +36,38 @@ You can use a scientific calculator to solve the questions.
 Time given: 15 minutes.
 Good luck!
 
+% \examsection breaks questions into different sections.
+%\examsection{Basic Algebra}
+
 % questions start here
 \begin{questions}
 
+% basic question
 \question What is the coefficient of $x$ in $x^2 - x + 2$?
 
-\question Collect the like terms for $x^2 + 3x - 2x - 7$.
+% question with points
 \question Expand $3(x^2-2x)$. \points{5}
 
+% question with hidden points
+\question Collect the like terms for $x^2 + 3x - 2x - 7$. \points*{2}
+
+% put a vertical space between questions
+% you can put lengths in px, cm, mm, in, em.
+\question Expand and simplify $(x+2)(x+3)-x^2$. \points{4}
+\vspace{2cm}
+
+% if you want equal spacing between questions, use \vspace{\stretch{1}}
+% the number inside \stretch determines the relative spacing between the questions
+\question Simplify this algebraic fraction: $\dfrac{2(x+3)(x-2)}{x-2}$. \points{4}
+\vspace{\stretch{1}}
+
+\question Fully factorise $x^2 - 5x + 6$. \points{4}
+\vspace{\stretch{1}}
+
+% a page break
+\newpage
+
+% multiple-choice question
 \question Which expression is equal to $x^2 - x$?  \points*{1}
 \begin{choices}
     \choice $x(x+1)$
@@ -51,6 +76,7 @@ Good luck!
     \choice $x^2 + 2x - x$
 \end{choices}
 
+% MC question with inline choices
 \question If you expand $(2x-1)(x+3)$, what will be the coefficient of $x$?
 
 \begin{choices*}
@@ -60,7 +86,7 @@ Good luck!
     \choice 6
 \end{choices*}
 
-% make parts of a question
+% question with parts
 \question Simplify: \points{4}
 \begin{parts}
     \part $\dfrac{3x}{x}$
@@ -69,16 +95,16 @@ Good luck!
     \vspace{1cm}
 \end{parts}
 
-% you can also assign marks for each part.
+% parts with points
+% use \question* instead of \question to show the total points for the question.
 \question* Use index laws to simplify the following.
 \begin{parts}
     \part $x^2 y^3 \times x y^2 z^3 \times x^5 z^2$  \points{3}
     \part $\dfrac{x^{10} y^{12}}{x^3 y^{-2}}$ \points{4}
 \end{parts}
+\vspace{2cm}
 
-\newpage
-
-% put parts across multiple columns
+% parts across multiple columns
 \question* Simplify:
 \begin{mcparts}[2]
     \part $3a + 8a$ \points{1}
@@ -89,13 +115,15 @@ Good luck!
     \vspace{2cm}
     \part $2-5m-m$ \points{1}
     \part $y^2+2y+3y-1$ \points{2}
-    \vspace{2cm}
 \end{mcparts}
+
+% insert a page break
+\newpage
 
 % insert an image
 % usage: \insertimage[width=...]{address-to-file}
 % note: this is a custom macro.
-%       the LaTeX default is \includegraphics[options]{address-to-file}
+%       LaTeX default is \includegraphics[options]{address-to-file}
 \question What is the most specific name of this shape? \points{1}
 
 \insertimage[width=0.4\textwidth]{fig/example-pic-quiz-1}
@@ -112,7 +140,7 @@ Good luck!
     \vspace{2cm}
 \end{parts}
 
-% specify the answers to the questions
+% specify answers to the questions
 \question Rationalise the denominator of $\dfrac{2}{\sqrt{1+x}}$, where $x \ge -1$. \points{2}
 \begin{answer}
 $\dfrac{2 \sqrt{x+1}}{x+1}$

@@ -30,7 +30,6 @@
 }
 
 \RequirePackage{enumitem}           % custom lists
-\RequirePackage{globalvals}         % loading and saving global variables
 \RequirePackage{fancyhdr}           % custom header and footer
 \RequirePackage{iftex}              % check if the compiler can handle fontspec
 
@@ -318,23 +317,6 @@
     \gdef\q@per@row{#1}%
     \@gradetabletrue
 }
-% if we fail to read the total number of questions from the .aux file,
-% the table cannot be drawn and the code will crash
-% (preventing the total number of questions to be recorded and so on)
-
-% \ifnum\totalquestions>0\relax
-%     \ClassInfo{ib}{tq-yes!}
-% \else
-%     \ClassInfo{ib}{tq-no!}
-% \fi
-
-% \ifcsname exam@totalquestions\endcsname%
-%     \ClassInfo{ib}{\protect\totalquestions loaded! Will print grade table in \protect\maketitle. \MessageBreak}%
-% \else%
-%     \@gradetablefalse%
-%     \ClassWarning{ib}{\protect\totalquestions\ not loaded! The total number of questions is unavailable from the .aux file. Compile LaTeX once again to draw the grade table. \MessageBreak}%
-% \fi
-
 
 \newcommand\gradetable{%
     % define counters for looping
@@ -343,13 +325,14 @@
     \newcounter{@col} % column iterator for loops
     \newcounter{@q}   % question iterator for loops
     
-    % the code is written to have exactly
     \setcounter{@q@todraw}{\q@per@row}
+    % draw questions only for all rows except the last row
     \@whilenum{\value{@q@todraw}<\totalquestions}\do{
         \make@table@middle[\arabic{@q@drawn}]{\arabic{@q@todraw}}
         \setcounter{@q@drawn}{\value{@q@todraw}}
         \addtocounter{@q@todraw}{\q@per@row}
-    }
+    }%
+    % for the last row, include total point as well
     \make@table[\arabic{@q@drawn}]{\totalquestions}
     \par%
 }
@@ -363,7 +346,7 @@
 % the total box is "right-flushed" for better organisation when more than 8 questions are drawn
 \newcommand\make@table[2][0]{%
     \renewcommand\arraystretch{1.5}%
-    \def\numcols{\the\numexpr#2-#1\relax}%
+    \def\numcols{\the\numexpr#2-#1\relax}% numbers for judging the width of table
     \def\numcols@pone{\the\numexpr#2-#1+1\relax}%
     \def\numcols@pthree{\the\numexpr#2-#1+3\relax}%
     % the extra space needed to flush the total box to the right is 
@@ -373,10 +356,13 @@
             +\tabcolsep*(2*\q@per@row-2*\numcols)%
             +\arrayrulewidth*(\q@per@row-\numcols) \relax%
     }%
+    % draw the table
     \begin{tabular}{|l| *{\numcols}{c|} p{\hspace@to@last} |c|}
     \cline{1-\numcols@pone} \cline{\numcols@pthree-\numcols@pthree}
+    		% first row has question numbers
         \hfill Q:&\make@cell@q[#1]{#2}&&\textbf{Total} \\
     \cline{1-\numcols@pone} \cline{\numcols@pthree-\numcols@pthree}
+    		% second row has marks
         \parbox[c][3.5em][c]{3em}{\hfill Marks:}&%
         \make@cell@marks[#1]{#2}&&%
         \relax\parbox[c][3em][b]{4em}{\hfill \textbf{/\totalpoints}} \\
@@ -389,13 +375,14 @@
 % without a "total" box at the end
 \newcommand\make@table@middle[2][0]{%
     \renewcommand\arraystretch{1.5}%
-    \def\numcols{%
-        \the\numexpr#2-#1\relax%
-    }%
+    \def\numcols{\the\numexpr#2-#1\relax}% number for judging the width of table
+    % draw the table
     \begin{tabular}{|l| *{\numcols}{c|}}
     \hline
+    		% first row has question numbers
         \hfill Q:&\make@cell@q[#1]{#2}\\
     \hline
+    		% second row has marks
         \parbox[c][3.5em][c]{3em}{\hfill Marks:}&%
         \make@cell@marks[#1]{#2}\\
     \hline
@@ -404,7 +391,8 @@
 }
 
 % use recursion to print cells
-% \make@cell@q[#1=0]{#2}
+% \make@cell@q[Qstart]{Qend} gives
+% (cell for Qstart+1) & (cell for Qstart+2) & ... & (cell for Qend)
 % source: https://tex.stackexchange.com/questions/361483/issue-with-loop-to-create-contents-of-tabular-row
 \def\amph{&}% putting & directly into a conditional cause it to break
 \newcommand\make@cell@q[2][0]{%
@@ -479,26 +467,34 @@
 % modify maketitle
 \renewcommand\maketitle{%
     \newgeometry{vmargin={2.9cm, 2.5cm}, hmargin={2cm, 2cm}, nomarginpar}%
-    \pagestyle{titlepage}
+    \pagestyle{titlepage}% header and footer for the title
+    % exam title
     \begin{flushleft} \fontsize{12.94086}{15.529032}\selectfont \textbf \@title \\[4ex] \end{flushleft}% title is 13pt
+    % exam information and boxes
     \begin{tabular*}{\linewidth}{@{} l @{\extracolsep{\fill}} r @{}}%
         \parbox[b][8ex]{0.45\linewidth}{ \@date \vfill \@testlength } & %
         \ifnumberbox\sessionnumberinput\else\ifnamebox\nameinput\fi\fi%
     \end{tabular*}%
     \par\vspace{0.1cm}%
     \rule{\textwidth}{0.8pt}\par%
+    % instructions
     \textbf{Instructions to candidates}\par%
     \unvbox\@instructions%
     \vfill%
+    % if \totalquestions is not properly read,
+    % force not to draw a table so that it can be read in the next compile
     \isnum{\totalquestions}%
         {\ClassInfo{ib}{Grade table available!}}%
         {\@gradetablefalse\ClassWarning{ib}{Run LaTeX again to make the grade table.}}%
+    % grade table
     \if@gradetable%
         \gradetable%
     \fi%
     \vspace{1cm}%
+    % total pages
     \hspace{2.3em} \totalpages\ pages%
     \newpage%
+    % start of the question section
     \restoregeometry%
     \pagestyle{plain}
 }%
@@ -546,14 +542,14 @@
 }
 
 % insert image in the middle
-% usage: \insertimage[width=2cm]{fig/image-name}
+% usage: \insertimage[option]{fig/image-name}
 \newcommand\insertimage[2][]{%
     \begin{center}%
         \includegraphics[#1]{#2}%
     \end{center}%
 }
 % insert framed image
-% usage: \insertframedimage[width=2cm]{fig/image-name}
+% usage: \insertframedimage[option]{fig/image-name}
 \newcommand\insertframedimage[2][]{%
     \fullwidth{%
         \setlength{\fboxsep}{1.5ex}%
@@ -572,11 +568,12 @@
     \newpage
 }
 
-% insert \donotwrite until the number of pages is a multiple of four
+% insert \donotwrite until the total number of pages is a multiple of four
 \newcounter{i@page} % iterator for the page number
 \def\fillbooklet{%
-    \setcounter{i@page}{\thepage}% i@page now equals to where \end{questions} is located
+    \setcounter{i@page}{\thepage}% i@page is the page number where \end{questions} is located
     % if i@page is not a multiple of four
+    % see the definition of \do@ifmultipleof in quiz.cls for more information
     \loop\ifnum\numexpr(\value{i@page}/4)*4-\value{i@page}=0\else
         % add a new blank page and repeat
         \newpage

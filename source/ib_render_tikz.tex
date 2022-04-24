@@ -1,3 +1,9 @@
+%
+% ib_render_tikz.tex
+% 
+% this is a script that renders the page borders for the IB style exams.
+% the rendered items can be found from source/graphics/tikz.
+% note: this script is best run in LaTeX or pdfLaTeX, rather than XeLaTeX.
 \documentclass{minimal}
 
 \usepackage{tikz}
@@ -12,7 +18,7 @@
 ]{geometry}
 
 \begin{document}
-\tikzsetnextfilename{page-margin} % page margins
+\tikzsetnextfilename{page-margin} %page margins
 \noindent\begin{tikzpicture}
     \draw[line width=1pt] ($ (current page.north west)+( 1.5,-1.0) $) -- ++(-0.5,0) -- ++(0,-0.5);
     \draw[line width=1pt] ($ (current page.north east)+(-1.5,-1.0) $) -- ++( 0.5,0) -- ++(0,-0.5);

@@ -10,13 +10,6 @@
 \usepackage{siunitx}                % SI Unit macros
 %\usepackage{textcomp,gensymb}       % symbols like degrees, celcius, ...
 %\usepackage{pgfplots}               % drawing graphs
-% \usepackage{background}
-% \backgroundsetup{scale = 1, angle = 0, opacity = 0.2,
-%   contents = {\includegraphics[width = \paperwidth,
-%   height = \paperheight, keepaspectratio]
-%   {fig/page5.pdf}}}
-% \usepackage{xcolor}
-% \color{blue}
 
 % custom macros
 \include{source/macros-mathrm}      % \A gives an upright A and so on
@@ -46,8 +39,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT STARTS HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % all content should go below here
 \begin{document}
-\raggedright
+\raggedright% left-align text
 
+% exam instructions on the front page
 \begin{instructions}
     \item Write your name in the box above.
     \item Do not open this examination paper until instructed to do so.
@@ -59,53 +53,76 @@
     \item The maximum mark for this examination paper is \textbf{[\totalpoints\ marks]}.% don't change this line
 \end{instructions}
 
-% display the name of the quiz and draw spaces for student name and total marks
-% note: the marks shown here is the sum of all marks given in the questions and parts below
+% draws the front page
 \maketitle
 
-\donotwrite
+% page 2
+\donotwrite% insert 'dont' write here' box
 \newpage
 
+% page 3
 % put any instructions, guides, etc. here
 % use two line-breaks to make a new paragraph
 Answers must be written within the answer boxes provided. Full marks are not necessarily awarded for~a~correct answer with no working. Answers must be supported by working and/or explanations. Solutions found from a graphic display calculator should be supported by suitable working. For example, if graphs are used to find a solution, you should sketch these as part of your answer. Where an answer is~incorrect, some marks may be given for a correct method, provided this is shown by written working. You~are therefore advised to show all working.
 
 % questions start here
 \begin{questions}
+% by default, \question prints the total points on the first line.
+% hence, all points for the question itself (not its parts) should be added with \points*, not \points
 \question George goes fishing. From experience he knows that the mean number of fish he catches per hour is $1.1$. It is assumed that the number of fish he catches can be modelled by a Poisson distribution. 
 
 On a day in which George spends $8$ hours fishing, find the probability that he will catch more than $9$ fish. \points*{4}
 
+% draw a space for answers
+% \makeanswerbox fills the rest of the page
+% \makeanswerbox[3cm] is 3cm tall
 \makeanswerbox
-\newpage
+\newpage% insert a page break, otherwise the next question may break
 
+% $T$ is an italic T. Use an upright T with $\T$ (defined on line 15).
 \question The Voronoi diagram below shows three identical cellular phone towers, $\T1$, $\T2$ and $\T3$. A fourth cellular phone tower, $\T4$ is located in the shaded region. The dashed lines in the diagram below represent the edges in the Voronoi diagram.
 
-Horizontal scale: $1$ unit represents $\SI{1}{\km}$. \linebreak
-Vertical scale: $1$ unit represents $\SI{1}{\km}$.
+% \SI and \num are convenient macros for scientific notation (from package siunitx)
+% for example, \SI{3e8}{\m\per\s} gives $3\times 10^{8} m s^{-1}$ and 
+% \num{1.2e-14} gives $1.2\times 10^{-14}$.
+% for more information visit https://ctan.org/pkg/siunitx
+Horizontal scale: $1$ unit represents \SI{1}{\km}. \linebreak
+Vertical scale: $1$ unit represents \SI{1}{\km}.
+% [width=0.66\textwidth] makes the image fill 2/3 of the horizontal space
 \insertimage[width=0.66\textwidth]{fig/example-pic-ib-1}
 
 Tim stands inside the shaded region. \points{2}
 \begin{parts}
     \part Explain why Tim will receive the strongest signal from tower $\T4$. \points{1}
 \end{parts}
+% Any mid-question explanations should sit outside \begin{parts} ... \end{parts}
+% for the proper indentation
 Tower $\T2$ has coordinates $(−9 , 5)$ and the edge connecting vertices $\A$ and $\B$ has equation $y = 3$.
-\begin{parts}[resume]
+\begin{parts}
     \part Write down the coordinates of tower $\T4$. \points{2}
 \end{parts}
+% same as above
 Tower $\T1$ has coordinates $(-13,3)$.
-\begin{parts}[resume]
+\begin{parts}
     \part Find the gradient of the edge of the Voronoi diagram between towers $\T1$ and $\T2$. \points{3}
 \end{parts}
 
-\bigskip\continue
+% insert some vertical space for better organisation
+\bigskip
+% \continue inserts a page break with a reminder:
+%    (question continues in the next page) and (question continued)
+\continue
+% the next page only has an answer box
 \makeanswerbox
 \newpage
 
-\question Charlie and Daniella each began a fitness programme. On day one, they both ran $\SI{500}{\m}$. On each subsequent day, Charlie ran $\SI{100}{\m}$ more than the previous day whereas Daniella increased her distance by $2\%$ of the distance ran on the previous day.
+% percent symbol is reserved for comments
+% use \% or \SI{2}{\percent} instead
+\question Charlie and Daniella each began a fitness programme. On day one, they both ran \SI{500}{\m}. On each subsequent day, Charlie ran \SI{100}{\m} more than the previous day whereas Daniella increased her distance by \SI{2}{\percent} of the distance ran on the previous day.
 
 \begin{parts}
     \part Calculate how far
+    % put subparts
     \begin{subparts}
         \subpart Charlie ran on day $20$ of his fitness programme.
         \subpart Daniella ran on day $20$ of her fitness programme. \points{5}
