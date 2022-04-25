@@ -231,42 +231,41 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACKGROUNDS, HEADERS AND FOOTERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\graphicspath{{source/graphics/}}
+
 % page borders
 \def\pageborder{%
 \begin{tikzpicture}[remember picture, overlay]%
-    \node at (current page.center) {\includegraphics{source/graphics/tikz/page-margin.pdf}};%
+    \node at (current page.center) {\includegraphics{page-border.pdf}};%
 \end{tikzpicture}%
 }
 % bindings
 \def\leftbinding{%
 \begin{tikzpicture}[remember picture, overlay]%
-    \node[anchor=west,inner sep=0pt] at (current page.west) {\includegraphics{source/graphics/tikz/binding-left.pdf}};%
+    \node[anchor=west,inner sep=0pt] at (current page.west) {\includegraphics{binding-left.pdf}};%
 \end{tikzpicture}
 }
 \def\rightbinding{%
 \begin{tikzpicture}[remember picture, overlay]%
-    \node[anchor=east,inner sep=0pt] at (current page.east) {\includegraphics{source/graphics/tikz/binding-right.pdf}};%
+    \node[anchor=east,inner sep=0pt] at (current page.east) {\includegraphics{binding-right.pdf}};%
 \end{tikzpicture}
 }
 % logos
 \newif\if@useiblogos
 \@useiblogosfalse
 \def\useiblogos{ \@useiblogostrue }
-\def\toplogo{ source/graphics/iblogo_1 }
-\def\botlogo{ source/graphics/iblogo_2 }
-\def\schoollogo{ source/graphics/schoollogo }
 \def\logos{
 \if@useiblogos
     \begin{tikzpicture}[remember picture, overlay]% top IB logo
-        \node[anchor=north east,inner sep=0pt] at ($ (current page.north east)+(-1.95,-0.95) $) {\includegraphics{\toplogo}};
+        \node[anchor=north east,inner sep=0pt] at ($ (current page.north east)+(-1.95,-0.95) $) {\includegraphics{iblogo_1}};
     \end{tikzpicture}
     \begin{tikzpicture}[remember picture, overlay]% bottom IB logo
-        \node[anchor=south east,inner sep=0pt] at (current page.south east) {\includegraphics{\botlogo}};
+        \node[anchor=south east,inner sep=0pt] at (current page.south east) {\includegraphics{iblogo_2}};
     \end{tikzpicture}
 \else
     \begin{tikzpicture}[remember picture, overlay]% school logo
         \node[anchor=north east,inner sep=0pt] at ($ (current page.north east)+(-2,-1) $)
-            {\includegraphics[height=4.25cm]{\schoollogo}};
+            {\includegraphics[height=4.25cm]{schoollogo}};
     \end{tikzpicture}
 \fi
 }
