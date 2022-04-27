@@ -167,7 +167,7 @@
 \setbox\allanswers=\vbox{}
 
 % environment to put answers in
-\newenvironment{answer}
+\newenvironment{answers}
 {%
     \def\@currentpart{\value{partsi}}% record the current part number
     \restartlist{parts}%
@@ -178,7 +178,6 @@
 }%
 {%
     \end{minipage}%
-    \smallskip%
     \egroup%ENDS THE VERTICAL BOX (1)
     \setcounter{partsi}{\@currentpart}%
 }
@@ -208,14 +207,8 @@
     \addtocounter{exampoints}{\value{sectionpoints}}%
     \setcounter{sectionpoints}{0}%
 }
-% print the section number and title
-\def\write@examsection#1{
-    \par\bigskip%
-    \underline{\smash{\large\bfseries SECTION \Alph{examsection}.~#1}}%
-    \par\smallskip%
-}
-% define a new section to divide the exam into different parts
-\newcommand{\examsection}[1]{%
+% set of codes to execute when a new section is made
+\def\do@examsection{%
     \ifnum\theexamsection=0 \else% if this is NOT the first section
         \update@section@points% update exampoints, record and reset sectionpoints
     \fi%
@@ -223,14 +216,37 @@
         \restartlist{questions}%
     \fi%
     \stepcounter{examsection}%
+}
+% print the section number and title
+\def\write@examsection#1{
     % writes the section title to the Answers box
     \global\setbox\allanswers=\vbox{%
         \unvbox \allanswers%
-        \write@examsection{#1}%
+        \par\bigskip%
+        \underline{\smash{\large\bfseries SECTION \Alph{examsection}.~#1}}%
+        \par\smallskip%
     }%
     % writes the section title to the document
-    \write@examsection{#1}%
+    \par\bigskip%
+    \underline{\smash{\large\bfseries SECTION \Alph{examsection}.~#1}}%
+    \par\smallskip%
 }
+\def\write@examsection@only#1{
+    % writes the section title to the Answers box
+    \global\setbox\allanswers=\vbox{%
+        \unvbox \allanswers%
+        \par\bigskip%
+        \underline{\smash{\large\bfseries #1}}%
+        \par\smallskip%
+    }%
+    % writes the section title to the document
+    \par\bigskip%
+    \underline{\smash{\large\bfseries #1}}%
+    \par\smallskip%
+}
+% define a new section to divide the exam into different parts
+\newcommand{\examsection}{\do@examsection\@ifstar{\write@examsection@only}{\write@examsection}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUESTIONS, PARTS, SUBPARTS, CHOICES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% questions
@@ -248,7 +264,7 @@
     rightmargin=1.5cm,
     listparindent=0cm,
     itemsep=0cm,
-    parsep=2.3ex,
+    parsep=1.5ex,
     topsep=0.55ex
 }
 % set of codes to execute right after \begin{questions}
@@ -297,7 +313,7 @@
     rightmargin=0cm,
     listparindent=0cm,
     itemsep=0cm,
-    parsep=2.3ex,
+    parsep=1.5ex,
     topsep=0cm,
     partopsep=0cm
 }
@@ -317,7 +333,7 @@
     rightmargin=0cm,
     listparindent=0cm,
     itemsep=0cm,
-    parsep=2.3ex,
+    parsep=1.5ex,
     topsep=0cm,
     partopsep=0cm
 }

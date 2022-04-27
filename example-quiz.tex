@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREAMBLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % sets the base layout
 % this class is an extension of article
-\documentclass{source/quiz}
+\documentclass{quiz}
 
 % packages already loaded in the class:
 % (default)         geometry, [inline]enumitem, fancyhdr, iftex, paracol
@@ -126,13 +126,13 @@ Good luck!
 %       LaTeX default is \includegraphics[options]{address-to-file}
 \question What is the most specific name of this shape? \points{1}
 
-\insertimage[width=0.4\textwidth]{fig/example-pic-quiz-1}
+\insertimage[width=0.4\textwidth]{_fig/example-pic-quiz-1}
 \vspace{1cm}
 
 % insert an image on the right side
 % usage: \insertimageonright[width=...]{address-to-file}
 % note: the text will not wrap around the image, so be careful about it.
-\question* For the diagram on the right, \insertimageonright[width=4cm]{fig/example-pic-quiz-1}
+\question* For the diagram on the right, \insertimageonright[width=4cm]{_fig/example-pic-quiz-1}
 \begin{parts}
     \part find $x$. \points{1}
     \vspace{2cm}
@@ -142,9 +142,9 @@ Good luck!
 
 % specify answers to the questions
 \question Rationalise the denominator of $\dfrac{2}{\sqrt{1+x}}$, where $x \ge -1$. \points{2}
-\begin{answer}
+\begin{answers}
 $\dfrac{2 \sqrt{x+1}}{x+1}$
-\end{answer}
+\end{answers}
 \vspace{1cm}
 
 % the answer environment works per question, not per part
@@ -155,13 +155,13 @@ $\dfrac{2 \sqrt{x+1}}{x+1}$
     \part $2x^2 - x - 1$ \points{4}
 \end{parts}
 
-\begin{answer}
+\begin{answers}
 \begin{parts}
     \part $(x+1)(x+2)$
     \part $2(x-2)(x-5)$
     \part $(2x+1)(x-1)$
 \end{parts}
-\end{answer}
+\end{answers}
 
 % questions end here
 \end{questions}
