@@ -29,6 +29,8 @@
 \RequirePackage{fancyhdr}           % custom header and footer
 \RequirePackage{iftex}              % check if the compiler can handle fontspec
 \RequirePackage{paracol}            % for multiple column parts
+\RequirePackage{graphicx}           % inserting images
+\RequirePackage{amsmath, amssymb}   % useful maths macros and symbols
 
 % set default font to be Arial for text and TeX Gyre Termes for Maths
 % this requires XeTeX or LuaTeX compilers
@@ -447,8 +449,8 @@
 \renewcommand{\tfrac}[2]{\genfrac{}{}{}{1}{\textstyle{#1}}{\textstyle{#2}}}
 
 % insert image in the middle
-% usage: \insertimage[options]{fig/image-name}
-\newcommand\insertimage[2][width=5cm]{%
+% usage: \includecenteredgraphics[option]{fig/image-name}
+\newcommand\includecenteredgraphics[2][]{%
     \begin{center}%
         \includegraphics[#1]{#2}%
     \end{center}%
@@ -456,8 +458,8 @@
 
 % insert image on the right end 
 % source: https://tex.stackexchange.com/questions/165691/placing-figures-adjacent-to-exam-choices
-% usage: \insertimageonright[options]{fig/image-name}
-\newcommand\insertimageonright[2][width=2cm]{%
+% usage: \includegraphicsonright[options]{fig/image-name}
+\newcommand\includegraphicsonright[2][width=2cm]{%
     \hfill\makebox[0pt][r]{\raisebox{-\height}[0pt][0pt]{\includegraphics[#1]{#2}}}%
 }
 

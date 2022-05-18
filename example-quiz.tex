@@ -10,6 +10,7 @@
 %
 % include the following packages
 \usepackage{amsmath,mathtools}       % for useful macros and shortcuts
+\usepackage{graphicx}
 %\usepackage{siunitx}                 % for SI Unit macros
 %\usepackage{textcomp,gensymb}        % symbols like degrees, celcius, ...
 %\usepackage{tikz,pgfplots}           % for drawing graphs and diagrams
@@ -121,18 +122,18 @@ Good luck!
 \newpage
 
 % insert an image
-% usage: \insertimage[width=...]{address-to-file}
+% usage: \includecenteredgraphics[width=...]{address-to-file}
 % note: this is a custom macro.
 %       LaTeX default is \includegraphics[options]{address-to-file}
 \question What is the most specific name of this shape? \points{1}
 
-\insertimage[width=0.4\textwidth]{_fig/example-pic-quiz-1}
+\includecenteredgraphics[width=0.4\textwidth]{_fig/example-pic-quiz-1}
 \vspace{1cm}
 
 % insert an image on the right side
-% usage: \insertimageonright[width=...]{address-to-file}
+% usage: \includegraphicsonright[width=...]{address-to-file}
 % note: the text will not wrap around the image, so be careful about it.
-\question* For the diagram on the right, \insertimageonright[width=4cm]{_fig/example-pic-quiz-1}
+\question* For the diagram on the right, \includegraphicsonright[width=4cm]{_fig/example-pic-quiz-1}
 \begin{parts}
     \part find $x$. \points{1}
     \vspace{2cm}

@@ -541,15 +541,15 @@
 }
 
 % insert image in the middle
-% usage: \insertimage[option]{fig/image-name}
-\newcommand\insertimage[2][]{%
+% usage: \includecenteredgraphics[option]{fig/image-name}
+\newcommand\includecenteredgraphics[2][]{%
     \begin{center}%
         \includegraphics[#1]{#2}%
     \end{center}%
 }
 % insert framed image
-% usage: \insertframedimage[option]{fig/image-name}
-\newcommand\insertframedimage[2][]{%
+% usage: \includeframedgraphics[option]{fig/image-name}
+\newcommand\includeframedgraphics[2][]{%
     \fullwidth{%
         \setlength{\fboxsep}{1.5ex}%
         \fbox{\parbox[c]{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\centering\includegraphics[#1]{#2}}}%
