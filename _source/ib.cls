@@ -4,7 +4,7 @@
 % for creating an IB-style Maths exams
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ib}[2022/04/20 IB-style exam template]
+\ProvidesClass{ib}[2022/06/12 IB-style exam template]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BASIS CLASS AND PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % use default article document as a basis
@@ -49,7 +49,8 @@
 \else
     \ClassWarning{quiz}{XeTeX or LuaTeX not used. TX fonts will be loaded instead of Arial and TeX Gyre Termes.}
     \RequirePackage[utf8]{inputenc}
-    \RequirePackage{newtxtext,newtxmath}
+    \RequirePackage[scaled=1.00833333]{newtxtext}
+    \RequirePackage[scaled=1.00833333]{newtxmath} 
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MACROS FOR LOCAL USE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
