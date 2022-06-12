@@ -64,11 +64,12 @@
     \ifcsname exam@#1\endcsname%
         \csname exam@#1\endcsname%
     \else%
-        {\mbox{\normalfont ??}}%
+        {\mbox{\normalfont ??}\ClassWarning{ib}{Variable #1 not defected from .aux file. Run LaTeX once again}}%
     \fi%
 }
 
 % checks if #1 is a number
+% source: https://tex.stackexchange.com/questions/7180/testing-for-number
 \def\isnum#1#2#3{%
     \if!\ifnum9<1#1!\else_\fi%
     #2 \else #3 \fi%
@@ -110,13 +111,12 @@
 % total number of points for the entire exam
 \newcommand\totalpoints{\@fromaux{totalpoints}}
 % total number of points for a specific question
-\newcommand\totalquestionpoints[1]{\@fromaux{points@q#1}}
-\newcommand\thisquestionpoints{\totalquestionpoints{\thequestion}}
+\newcommand\pointsofq[1]{\@fromaux{points@q#1}}
+\newcommand\pointsofthisq{\pointsofq{\thequestion}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WRITING TOTALS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % write the total points of the current question
-\def\recordquestionpoints{\@toaux{points@q\arabic{questionsi}}{\thequestionpoints}}
-
+\def\recordquestionpoints{\@toaux{points@q\thequestion}{\thequestionpoints}}
 
 \AtEndDocument{% update the points one last time
     \@toaux{totalpoints}{\theexampoints}% the total points for the entire exam
@@ -130,7 +130,7 @@
 }
 % \print@question@points prints the total points in the question.
 \def\print@question@points{%
-    [Maximum mark:~\thisquestionpoints]%
+    [Maximum mark:~\pointsofthisq]%
     \par%
 }
 
@@ -306,14 +306,19 @@
     \fancyfoot[RO]{\mbox{\plainfooterRO}}
     \fancyfoot[RE]{\mbox{\plainfooterRE}}
 }
+\fancypagestyle{empty}{% when \totalpages is not defined from .aux
+    \fancyhead{}
+    \fancyfoot{}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GRADE TABLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \@gradetabletrue then draw the grade table
 \newif\if@gradetable
 \@gradetablefalse
 % include \drawgradetable in the preamble to draw a grade table on the front page.
+%   \drawgradetable[n] draws table with n questions per row (default n=8)
 \newcommand\drawgradetable[1][8]{%
-    \gdef\q@per@row{#1}%
+    \gdef\q@per@row{#1}
     \@gradetabletrue
 }
 
@@ -342,14 +347,14 @@
 % \make@table[Qstart]{Qend} draws a grading table
 % from Qstart+1 to Qend
 % then it attaches a "total" box at the end
-% the total box is "right-flushed" for better organisation when more than 8 questions are drawn
+% the total box is "aligned right" for better organisation
 \newcommand\make@table[2][0]{%
-    \renewcommand\arraystretch{1.5}%
+    \renewcommand\arraystretch{1.5}% make table slightly bigger than usual
     \def\numcols{\the\numexpr#2-#1\relax}% numbers for judging the width of table
     \def\numcols@pone{\the\numexpr#2-#1+1\relax}%
     \def\numcols@pthree{\the\numexpr#2-#1+3\relax}%
     % the extra space needed to flush the total box to the right is 
-    %   cell content widths + column separations + border widths
+    % cell content widths + column separations + border widths
     \def\hspace@to@last{%
     \dimexpr (3em)*(\q@per@row-\numcols)%
             +\tabcolsep*(2*\q@per@row-2*\numcols)%
@@ -367,7 +372,7 @@
         \relax\parbox[c][3em][b]{4em}{\hfill \textbf{/\totalpoints}} \\
     \cline{1-\numcols@pone} \cline{\numcols@pthree-\numcols@pthree}
     \end{tabular}%
-    \renewcommand\arraystretch{1.2}
+    \renewcommand\arraystretch{1.2}% undo the table size change
     \par
 }
 % \make@table@middle[Qstart]{Qend} draws a grading table
@@ -406,7 +411,7 @@
 }
 \newcommand\make@cell@marks[2][0]{%
     \ifnum#1>0\setcounter{@q}{#1}\fi%
-    \stepcounter{@q}\parbox[c][3em][b]{3em}{\hfill/\totalquestionpoints{\the@q}}
+    \stepcounter{@q}\parbox[c][3em][b]{3em}{\hfill/\pointsofq{\the@q}}
     \ifnum\numexpr#2>\value{@q}%
         \amph\make@cell@marks{#2}%
     \else%
@@ -496,7 +501,13 @@
     \newpage%
     % start of the question section
     \restoregeometry%
-    \pagestyle{plain}
+    % headers and footers refer to \totalpoints
+    % so don't use them when \totalpoints is not properly defined from .aux
+    \isnum\totalpoints{%
+        \pagestyle{plain}%
+    }{%
+        \pagestyle{empty}%
+    }%
 }%
 
 
