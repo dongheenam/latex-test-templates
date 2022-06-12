@@ -13,7 +13,7 @@
 
 % load necessary packages
 \RequirePackage{tikz}               % drawing figures
-    \usetikzlibrary{calc}
+\usetikzlibrary{calc}
 
 \RequirePackage{geometry}           % margin control
 % set the geometry of the paper
