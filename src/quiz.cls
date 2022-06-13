@@ -72,8 +72,15 @@
     \ifcsname exam@#1\endcsname%
         \csname exam@#1\endcsname%
     \else%
-        {\mbox{\normalfont ??}}%
+        {\mbox{\normalfont ??}\ClassWarning{ib}{Variable #1 not defected from .aux file. Run LaTeX once again}}%
     \fi%
+}
+
+% checks if #1 is a number
+% source: https://tex.stackexchange.com/questions/7180/testing-for-number
+\def\isnum#1#2#3{%
+    \if!\ifnum9<1#1!\else_\fi%
+    #2 \else #3 \fi%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LENGTHS AND FULLWIDTH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -428,7 +435,15 @@
     \renewcommand{\footruleskip}{0pt}
     \fancyfoot[R]{\mbox{\plainfooterR}}
 }
-\pagestyle{plain}
+\fancypagestyle{empty}{% when \totalpages is not defined from .aux
+    \fancyhead{}
+    \fancyfoot{}
+}
+\isnum\totalpages{%
+    \pagestyle{plain}%
+}{%
+    \pagestyle{empty}%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % modify maketitle 
