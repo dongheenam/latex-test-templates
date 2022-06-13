@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% INFORMATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ib.cls
+% hsc.cls
 % 
-% for creating an IB-style Maths exams
+% for creating an HSC-style Maths exams
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ib}[2022/06/12 IB-style exam template]
+\ProvidesClass{hsc}[2022/06/12 HSC-style exam template]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BASIS CLASS AND PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % use default article document as a basis
@@ -31,8 +31,6 @@
 
 \RequirePackage{enumitem}           % custom lists
 \RequirePackage{fancyhdr}           % custom header and footer
-\RequirePackage{iftex}              % check if the compiler can handle fontspec
-
 
 % set default font to be Arial for text and TeX Gyre Termes for Maths
 % this requires XeTeX or LuaTeX compilers
@@ -49,8 +47,7 @@
 \else
     \ClassWarning{quiz}{XeTeX or LuaTeX not used. TX fonts will be loaded instead of Arial and TeX Gyre Termes.}
     \RequirePackage[utf8]{inputenc}
-    \RequirePackage[scaled=1.00833333]{newtxtext}
-    \RequirePackage[scaled=1.00833333]{newtxmath} 
+    \RequirePackage{newtxtext,newtxmath}
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MACROS FOR LOCAL USE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -555,14 +552,14 @@
 
 % insert image in the middle
 % usage: \includecenteredgraphics[option]{fig/image-name}
-\newcommand\includecenteredgraphics[2][]{%
+\newcommand\includecenteredgraphics[2][\relax]{%
     \begin{center}%
         \includegraphics[#1]{#2}%
     \end{center}%
 }
 % insert framed image
 % usage: \includeframedgraphics[option]{fig/image-name}
-\newcommand\includeframedgraphics[2][]{%
+\newcommand\includeframedgraphics[2][\relax]{%
     \fullwidth{%
         \setlength{\fboxsep}{1.5ex}%
         \fbox{\parbox[c]{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\centering\includegraphics[#1]{#2}}}%
