@@ -1,3 +1,7 @@
+## Copyrighted images
+src/graphics/schoollogo*
+src/graphics/iblogo_?.pdf
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
