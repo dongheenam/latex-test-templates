@@ -272,6 +272,7 @@
 }
 
 % headers and footers
+\renewcommand{\headrulewidth}{0pt}
 \def\plainfooterRO{%
     \ifnum\thepage<\totalpages%
         \textbf{Turn over}%

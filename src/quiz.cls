@@ -30,7 +30,7 @@
 \RequirePackage{iftex}              % check if the compiler can handle fontspec
 \RequirePackage{paracol}            % for multiple column parts
 \RequirePackage{graphicx}           % inserting images
-\RequirePackage{amsmath, amssymb}   % useful maths macros and symbols
+\RequirePackage{amsmath, amssymb, mathtools}   % useful maths macros and symbols
 
 % set default font to be Arial for text and TeX Gyre Termes for Maths
 % this requires XeTeX or LuaTeX compilers
@@ -420,6 +420,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HEADERS AND FOOTERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % set header and footer
+\renewcommand{\headrulewidth}{0pt}
 \def\plainfooterR{%
     \ifnum\thepage<\totalpages%
         {page \thepage\ of \totalpages}%
