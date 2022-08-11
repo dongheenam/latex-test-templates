@@ -5,6 +5,9 @@ src/graphics/iblogo_?.pdf
 ## local settings
 .vscode
 
+
+###### .gitignore setup for a TeX repository
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

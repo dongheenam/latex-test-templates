@@ -419,6 +419,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HEADERS AND FOOTERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\renewcommand{\headrulewidth}{0pt}
 % set header and footer
 \def\plainfooterR{%
     \ifnum\thepage<\totalpages%
