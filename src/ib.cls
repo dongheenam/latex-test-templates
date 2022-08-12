@@ -233,23 +233,33 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACKGROUNDS, HEADERS AND FOOTERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \graphicspath{{source/graphics/}}
+% for papers 2 and 3
+\newif\if@q@only
+\@q@onlytrue
+\def\questionsonly { \@q@onlytrue }
 
 % page borders
 \def\pageborder{%
+\if@q@only\else%
 \begin{tikzpicture}[remember picture, overlay]%
     \node at (current page.center) {\includegraphics{page-border.pdf}};%
 \end{tikzpicture}%
+\fi%
 }
 % bindings
 \def\leftbinding{%
-\begin{tikzpicture}[remember picture, overlay]%
-    \node[anchor=west,inner sep=0pt] at (current page.west) {\includegraphics{binding-left.pdf}};%
-\end{tikzpicture}
+\if@q@only\else%
+    \begin{tikzpicture}[remember picture, overlay]%
+        \node[anchor=west,inner sep=0pt] at (current page.west) {\includegraphics{binding-left.pdf}};%
+    \end{tikzpicture}%
+\fi%
 }
 \def\rightbinding{%
-\begin{tikzpicture}[remember picture, overlay]%
-    \node[anchor=east,inner sep=0pt] at (current page.east) {\includegraphics{binding-right.pdf}};%
-\end{tikzpicture}
+\if@q@only\else%
+    \begin{tikzpicture}[remember picture, overlay]%
+        \node[anchor=east,inner sep=0pt] at (current page.east) {\includegraphics{binding-right.pdf}};%
+    \end{tikzpicture}%
+\else\fi%
 }
 % logos
 \newif\if@useiblogos
@@ -277,12 +287,12 @@
     \ifnum\thepage<\totalpages%
         \textbf{Turn over}%
     \else\ifnum\thepage=\totalpages%
-        \textbf{END OF EXAM}%
+        \if@q@only\textbf{END OF QUESTIONS}\else\textbf{END OF EXAM}\fi%
     \fi\fi%
 }
 \def\plainfooterRE{%
     \ifnum\thepage=\totalpages%
-        \textbf{END OF EXAM}%
+        \if@q@only\textbf{END OF QUESTIONS}\else\textbf{END OF EXAM}\fi%
     \fi%
 }
 \def\plainheader{%
@@ -577,6 +587,16 @@
         \node[draw,align=center,inner sep=0.6cm]
             at (current page.center) 
             {Please \textbf{do not} write on this page. \\ \\ Answers written on this page \\ will not be marked.};
+    \end{tikzpicture}
+    \newpage
+}
+% insert "blank page"
+\def\blankpage{%
+    \par
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[draw,align=center,inner xsep=1.4cm, inner ysep=0.8cm]
+            at (current page.center) 
+            {Blank page};
     \end{tikzpicture}
     \newpage
 }
