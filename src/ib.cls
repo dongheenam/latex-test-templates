@@ -234,13 +234,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACKGROUNDS, HEADERS AND FOOTERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \graphicspath{{source/graphics/}}
 % for papers 2 and 3
-\newif\if@q@only
-\@q@onlytrue
-\def\questionsonly { \@q@onlytrue }
+\newif\if@papertwo
+\@papertwofalse
+\def\papertwo { \@papertwotrue }
 
 % page borders
 \def\pageborder{%
-\if@q@only\else%
+\if@papertwo\else%
 \begin{tikzpicture}[remember picture, overlay]%
     \node at (current page.center) {\includegraphics{page-border.pdf}};%
 \end{tikzpicture}%
@@ -248,14 +248,14 @@
 }
 % bindings
 \def\leftbinding{%
-\if@q@only\else%
+\if@papertwo\else%
     \begin{tikzpicture}[remember picture, overlay]%
         \node[anchor=west,inner sep=0pt] at (current page.west) {\includegraphics{binding-left.pdf}};%
     \end{tikzpicture}%
 \fi%
 }
 \def\rightbinding{%
-\if@q@only\else%
+\if@papertwo\else%
     \begin{tikzpicture}[remember picture, overlay]%
         \node[anchor=east,inner sep=0pt] at (current page.east) {\includegraphics{binding-right.pdf}};%
     \end{tikzpicture}%
@@ -287,12 +287,12 @@
     \ifnum\thepage<\totalpages%
         \textbf{Turn over}%
     \else\ifnum\thepage=\totalpages%
-        \if@q@only\textbf{END OF QUESTIONS}\else\textbf{END OF EXAM}\fi%
+        \if@papertwo\textbf{END OF QUESTIONS}\else\textbf{END OF EXAM}\fi%
     \fi\fi%
 }
 \def\plainfooterRE{%
     \ifnum\thepage=\totalpages%
-        \if@q@only\textbf{END OF QUESTIONS}\else\textbf{END OF EXAM}\fi%
+        \if@papertwo\textbf{END OF QUESTIONS}\else\textbf{END OF EXAM}\fi%
     \fi%
 }
 \def\plainheader{%

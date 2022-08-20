@@ -1,0 +1,188 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREAMBLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% sets the base layout
+% this class is based on article
+\documentclass{src/hsc}
+
+% include the following packages
+%\usepackage{amsmath,mathtools}      % useful macros and shortcuts
+%\usepackage{booktabs}               % better tables
+%\usepackage[f]{esvect}              % better vector symbols
+\usepackage{siunitx}                % SI Unit macros
+%\usepackage{textcomp,gensymb}       % symbols like degrees, celcius, ...
+%\usepackage{pgfplots}               % drawing graphs
+
+% custom macros
+\input{src/macros-mathrm}      % \A gives an upright A and so on
+
+% location of the image files for the layout
+% change the directory appropriately if you would like to move the image files
+\graphicspath{{src/graphics/}}
+
+\schoolname{Schol Name}
+\examyear{2022}
+\examtitle{FINAL EXAMINATION}
+\examsubject{Physics}
+
+% temporary background
+\usepackage{background}
+\backgroundsetup{scale = 1, angle = 0,
+   contents = {\includegraphics[width = \paperwidth,
+   height = \paperheight, keepaspectratio]
+   {src/test/2021-hsc-physics 17.pdf}}
+}
+\usepackage{xcolor}
+
+\begin{document}
+\color{blue}
+%%% FRONT PAGE %%%
+
+% school logo, year, title, etc. 
+\maketitle
+
+% exam informations
+\begin{infobox}{General Instructions}
+    \begin{infoitems}
+        \item Reading time -- 5 minutes
+        \item Working time -- 3 hours
+        \item Write using black pen
+        \item Draw diagrams using pencil
+        \item Calculators approved by NESA may be used
+        \item A data sheet, formulae sheet and Periodic Table are provided at the back of this paper
+    \end{infoitems}
+\end{infobox}
+
+\begin{infobox}{Total marks:\linebreak \totalpoints}
+    \textbf{Section I -- \totalsectionpoints{1} marks} (pages \pageref{mcqfirst}--\pageref{mcqlast})
+    \begin{infoitems}
+        \item Attempt Questions \ref{mcqfirst}--\ref{mcqlast}
+        \item Allow about 35 minutes for this section
+    \end{infoitems}
+    \textbf{Section II -- \totalsectionpoints{2} marks} (pages \pageref{safirst}--\pageref{salast})
+    \begin{infoitems}
+        \item Attempt Questions \ref{safirst}--\ref{salast}
+        \item Allow about 2 hours and 25 minutes for this section
+    \end{infoitems}
+\end{infobox}
+
+
+%%% SECTION I %%%
+% clear page and set styling
+\startsectionone
+
+\examsection{Section I}{
+    \textbf{%
+        {\thissectionpoints} marks \linebreak
+        Attempt Questions \ref{mcqfirst}--\ref{mcqlast} \linebreak
+        Allow about 35 minutes for this section
+    }\par\medskip
+
+    Use the multiple-choice answer sheet for Questions \ref{mcqfirst}--\ref{mcqlast}.
+}
+
+\begin{mcquestions}
+    \question\label{mcqfirst} A marble is rolled off a horizontal bench and falls to the floor.
+    
+    \includecenteredgraphics[height=4.5cm]{fig/example-hsc-1} \bigskip
+
+    Rolling the marble at a slower speed would
+
+    \begin{choices}
+        \choice increase the range.
+        \choice decrease the range.
+        \choice increase the time of flight.
+        \choice decrease the time of flight.
+    \end{choices}
+
+    \question A positively charged particle is moving at velocity, $v$, in an electric field as shown.
+    \includecenteredgraphics[height=3.4cm]{fig/example-hsc-2}
+
+    What is the direction of the force acting on the particle due to the electric field?
+
+    \begin{choices}
+        \choice Into the page
+        \choice Out of the page
+        \choice Up the page
+        \choice Down the page
+    \end{choices}
+
+    \clearpage
+
+    \question Which of the following is NOT a fundamental particle in the Standard Model of matter?
+
+    \begin{choices}
+        \choice Electron
+        \choice Gluon
+        \choice Muon
+        \choice Proton
+    \end{choices}
+
+    \question\label{mcqlast} An astronaut is travelling towards Earth in a spaceship at $0.8c$. At regular intervals, a radio pulse is sent from the spaceship to an observer on Earth.
+
+    Which quantity would the astronaut and the observer measure to be the same?
+
+    \begin{choices}
+        \choice Length of the spaceship
+        \choice Speed of the radio pulses
+        \choice Momentum of the astronaut
+        \choice Time interval between the radio pulses
+    \end{choices}
+\end{mcquestions}
+
+\fillbooklet
+
+\finishsectionone
+%%% END OF SECTION I
+
+%%% TITLE PAGE FOR SECTION II
+\makebooklettitle
+
+\textbf{%
+    {\thissectionpoints} marks \linebreak
+    Attempt Questions \ref{safirst}--\ref{salast} \linebreak
+    Allow about 2 hours and 25 minutes for this section
+}
+\vspace{1.2cm}
+
+\begin{infobox}{Instructions}
+    \begin{infoitems}[itemsep=2ex]
+        \item Write your Centre Number and Student Number at the top of this page.
+        \item Answer the questions in the spaces provided. These spaces provide guidance for the expected length of response.
+        \item Show all relevant working in questions involving calculations.
+        \item Extra writing space is provided at the back of this booklet. \linebreak
+        If you use this space, clearly indicate which question you are answering.
+    \end{infoitems}
+\end{infobox}
+
+%%% BEGINNING OF SECTION II
+\startsectiontwo
+
+\begin{questions}
+    \question\label{safirst} A DC motor is constructed from a single loop of wire with dimensions $\SI{0.10}{\m}$. The magnetic field strength is $\SI{0.40}{\T}$ and a current of $\SI{14}{\A}$ flows through the loop.
+    \includecenteredgraphics[height=5cm]{fig/example-hsc-3}
+
+    
+    \begin{parts}
+        \part Calculate the magnitude of the maximum torque produced by the motor. \points{2} 
+
+        \makeanswerbox[4]
+
+        \part\points{2} Describe how the magnitude of the torque changes as the loop moves through half a rotation from the position shown. 
+
+        \makeanswerbox[4]
+    \end{parts}
+
+    \questionbreak
+
+    How do the results from
+
+    \question\label{salast} Another question
+
+\end{questions}
+
+\finishsectiontwo
+%%% END OF SECTION III
+
+\writingspace
+\writingspace
+
+\end{document}

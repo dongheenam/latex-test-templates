@@ -103,7 +103,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COUNTERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 % counters for tracking parts of the exam
 \newcounter{examsection}                % test section number, default output is \Alph
 \setcounter{examsection}{0}
@@ -450,14 +449,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % modify maketitle 
 \renewcommand\maketitle{%
-    {%
     \begin{center}%
         Student name: \rule{7cm}{0.4pt} \hfill Marks: \rule{2cm}{0.4pt} / \totalpoints%
     \end{center}%
     \begin{center}%
     {\LARGE \textbf \@title }\\[4ex] %
     \end{center}%
-    }%
 }%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MISCELLANEOUS COMMANDS AND ENVIRONMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
