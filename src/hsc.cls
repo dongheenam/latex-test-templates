@@ -333,7 +333,13 @@
 \newcommand\examyear[1]{\gdef\@examyear{#1}}
 \newcommand\examtitle[1]{\gdef\@examtitle{#1}}
 \newcommand\examsubject[1]{\gdef\@examsubject{#1}}
+% macro for time setups
+\newcommand\readingtime[1]{\gdef\putreadingtime{#1}}
+\newcommand\workingtime[1]{\gdef\putworkingtime{#1}}
+\newcommand\sectiononetime[1]{\gdef\putsectiononetime{#1}}
+\newcommand\sectiontwotime[1]{\gdef\putsectiontwotime{#1}}
 
+% blocks for information
 \newcommand\sectiononeinfo[1]{\gdef\@sectiononeinfo{#1}}
 \newcommand\sectiontwoinfo[1]{\gdef\@sectiontwoinfo{#1}}
 
