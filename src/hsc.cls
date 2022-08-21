@@ -161,9 +161,6 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SECTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% define a new section to divide the exam into different parts
-\newcommand{\examsection}[1]{\do@examsection\smash{\large\bfseries #1}}
-
 % set of codes to execute when a new section is made
 \def\do@examsection{%
     \ifnum\theexamsection=0 \else% if this is NOT the first section
@@ -400,6 +397,7 @@
     \clearpage%
     \normalfont%
     \pagestyle{sectionone}%
+    \do@examsection% section break
 }
 
 % title for Section 2
@@ -429,7 +427,6 @@
     \end{center}
     \vfill
     \clearpage%
-    \normalfont%
     % geometry for section two
     \newgeometry{
         asymmetric, % marginpar is always on the right
@@ -439,7 +436,9 @@
         marginparwidth=1cm,
         marginparsep=0.5cm
     }
+    \normalfont%
     \pagestyle{sectiontwobody}
+    \do@examsection% section break
 }
 
 
