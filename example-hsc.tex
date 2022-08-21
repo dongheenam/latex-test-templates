@@ -18,71 +18,63 @@
 % change the directory appropriately if you would like to move the image files
 \graphicspath{{src/graphics/}}
 
-\schoolname{Schol Name}
+\schoolname{School Name}
 \examyear{2022}
 \examtitle{FINAL EXAMINATION}
 \examsubject{Physics}
 
-% temporary background
-\usepackage{background}
-\backgroundsetup{scale = 1, angle = 0,
-   contents = {\includegraphics[width = \paperwidth,
-   height = \paperheight, keepaspectratio]
-   {src/test/2021-hsc-physics 17.pdf}}
-}
-\usepackage{xcolor}
-
 \begin{document}
-\color{blue}
-%%% FRONT PAGE %%%
 
-% school logo, year, title, etc. 
-\maketitle
+%%% SECTION I BEGIN
 
-% exam informations
-\begin{infobox}{General Instructions}
-    \begin{infoitems}
-        \item Reading time -- 5 minutes
-        \item Working time -- 3 hours
-        \item Write using black pen
-        \item Draw diagrams using pencil
-        \item Calculators approved by NESA may be used
-        \item A data sheet, formulae sheet and Periodic Table are provided at the back of this paper
-    \end{infoitems}
-\end{infobox}
+% title
+\sectiononeinfo{
+    \begin{infobox}{General Instructions}
+        \begin{infoitems}
+            \item Reading time -- 5 minutes
+            \item Working time -- 3 hours
+            \item Write using black pen
+            \item Draw diagrams using pencil
+            \item Calculators approved by NESA may be used
+            \item A data sheet, formulae sheet and Periodic Table are provided at the back of this paper
+        \end{infoitems}
+    \end{infobox}
 
-\begin{infobox}{Total marks:\linebreak \totalpoints}
-    \textbf{Section I -- \totalsectionpoints{1} marks} (pages \pageref{mcqfirst}--\pageref{mcqlast})
-    \begin{infoitems}
-        \item Attempt Questions \ref{mcqfirst}--\ref{mcqlast}
-        \item Allow about 35 minutes for this section
-    \end{infoitems}
-    \textbf{Section II -- \totalsectionpoints{2} marks} (pages \pageref{safirst}--\pageref{salast})
-    \begin{infoitems}
-        \item Attempt Questions \ref{safirst}--\ref{salast}
-        \item Allow about 2 hours and 25 minutes for this section
-    \end{infoitems}
-\end{infobox}
+    \begin{infobox}{Total marks:\linebreak \totalpoints}
+        \textbf{Section I -- 20 marks} (pages 2--24)
+        \begin{infoitems}
+            \item Attempt Questions 1--20
+            \item Allow about 35 minutes for this section
+        \end{infoitems}\medskip
+
+        \textbf{Section II -- 80 marks} (pages 17--36)
+        \begin{infoitems}
+            \item Attempt Questions 21--35
+            \item Allow about 2 hours and 25 minutes for this section
+        \end{infoitems}
+    \end{infobox}
+}
+\sectiononetitle
+
+\examsection{Section I}
 
 
-%%% SECTION I %%%
-% clear page and set styling
-\startsectionone
-
-\examsection{Section I}{
+{\raggedright
     \textbf{%
-        {\thissectionpoints} marks \linebreak
-        Attempt Questions \ref{mcqfirst}--\ref{mcqlast} \linebreak
+        20 marks \linebreak
+        Attempt Questions 1--20 \linebreak
         Allow about 35 minutes for this section
-    }\par\medskip
+    }
 
-    Use the multiple-choice answer sheet for Questions \ref{mcqfirst}--\ref{mcqlast}.
+    Use the multiple-choice answer sheet for Questions 1--20.
+
+    \vspace{-0.6cm}\hrulefill
 }
 
 \begin{mcquestions}
     \question\label{mcqfirst} A marble is rolled off a horizontal bench and falls to the floor.
     
-    \includecenteredgraphics[height=4.5cm]{fig/example-hsc-1} \bigskip
+    \includecenteredgraphics[height=4.5cm]{fig/example-hsc-1}
 
     Rolling the marble at a slower speed would
 
@@ -94,6 +86,7 @@
     \end{choices}
 
     \question A positively charged particle is moving at velocity, $v$, in an electric field as shown.
+
     \includecenteredgraphics[height=3.4cm]{fig/example-hsc-2}
 
     What is the direction of the force acting on the particle due to the electric field?
@@ -128,47 +121,47 @@
     \end{choices}
 \end{mcquestions}
 
-\fillbooklet
+\fillbooklet{\blankpage}
 
-\finishsectionone
-%%% END OF SECTION I
+%%% SECTION I END
 
-%%% TITLE PAGE FOR SECTION II
-\makebooklettitle
+%%% SECTION II BEGIN
 
-\textbf{%
-    {\thissectionpoints} marks \linebreak
-    Attempt Questions \ref{safirst}--\ref{salast} \linebreak
-    Allow about 2 hours and 25 minutes for this section
+% title
+\sectiontwoinfo{%
+    \textbf{%
+        80 marks \linebreak
+        Attempt Questions 21--35 \linebreak
+        Allow about 2 hours and 25 minutes for this section
+    }
+    \vspace{1.2cm}
+
+    \begin{infobox}{Instructions}
+        \begin{infoitems}[itemsep=2ex]
+            \item Write your Centre Number and Student Number at the top of this page.
+            \item Answer the questions in the spaces provided. These spaces provide guidance for the expected length of response.
+            \item Show all relevant working in questions involving calculations.
+            \item Extra writing space is provided at the back of this booklet. \linebreak
+            If you use this space, clearly indicate which question you are answering.
+        \end{infoitems}
+    \end{infobox}
+
 }
-\vspace{1.2cm}
-
-\begin{infobox}{Instructions}
-    \begin{infoitems}[itemsep=2ex]
-        \item Write your Centre Number and Student Number at the top of this page.
-        \item Answer the questions in the spaces provided. These spaces provide guidance for the expected length of response.
-        \item Show all relevant working in questions involving calculations.
-        \item Extra writing space is provided at the back of this booklet. \linebreak
-        If you use this space, clearly indicate which question you are answering.
-    \end{infoitems}
-\end{infobox}
-
-%%% BEGINNING OF SECTION II
-\startsectiontwo
+\sectiontwotitle
 
 \begin{questions}
     \question\label{safirst} A DC motor is constructed from a single loop of wire with dimensions $\SI{0.10}{\m}$. The magnetic field strength is $\SI{0.40}{\T}$ and a current of $\SI{14}{\A}$ flows through the loop.
-    \includecenteredgraphics[height=5cm]{fig/example-hsc-3}
 
-    
+    \includecenteredgraphics[height=4.95cm]{fig/example-hsc-3}
+
     \begin{parts}
-        \part Calculate the magnitude of the maximum torque produced by the motor. \points{2} 
+        \part\points{2} Calculate the magnitude of the maximum torque produced by the motor.
 
-        \makeanswerbox[4]
+        \answerbox[4]
 
         \part\points{2} Describe how the magnitude of the torque changes as the loop moves through half a rotation from the position shown. 
 
-        \makeanswerbox[4]
+        \answerbox[4]
     \end{parts}
 
     \questionbreak
@@ -179,8 +172,8 @@
 
 \end{questions}
 
-\finishsectiontwo
-%%% END OF SECTION III
+\clearpage
+%%% SECTION II END
 
 \writingspace
 \writingspace
