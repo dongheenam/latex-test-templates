@@ -12,6 +12,7 @@
 \pagenumbering{arabic}
 
 % load necessary packages
+\RequirePackage{amsmath,mathtools}  % useful macros and shortcuts
 \RequirePackage{tikz}               % drawing figures
 \usetikzlibrary{calc}
 
@@ -31,6 +32,7 @@
 
 \RequirePackage{enumitem}           % custom lists
 \RequirePackage{fancyhdr}           % custom header and footer
+\RequirePackage{paracol}            % multiple columns
 
 % set default font to be Arial for text and TeX Gyre Termes for Maths
 % this requires XeTeX or LuaTeX compilers
@@ -53,6 +55,16 @@
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MACROS FOR LOCAL USE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% runs different code if a number is a multiple of another
+% source: https://tex.stackexchange.com/questions/38743/checking-if-a-number-is-a-multiple-of-4
+\newcommand{\do@ifmultipleof}[4]{%
+    \ifnum\numexpr((#2)/(#1))*(#1)-(#2)=0%
+        #3%
+    \else%
+        #4%
+    \fi%
+}
+
 % writes a value and its name to .aux file
 \newcommand{\@toaux}[2]{%
     \immediate\write\@auxout{%
@@ -87,6 +99,8 @@
 % length adjustments
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.5cm}
+\setlength{\columnsep}{0cm}% paracol
+% \setlength{\columnseprule}{0.4pt}% paracol
 \linespread{0.97}
 
 % fullwidth
@@ -178,8 +192,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUESTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % recognises multiple choice environment
-\newif\ifmcq
-\mcqfalse
+\newif\if@mcq
+\@mcqfalse
 
 % questions environment
 \newlist{questions}{enumerate}{1}
@@ -201,7 +215,7 @@
 }
 % mcq environment
 \newenvironment{mcquestions}{
-    \mcqtrue
+    \@mcqtrue
     \begin{questions}[
         resume=q_series,
         label=\textbf{\arabic*},
@@ -211,7 +225,7 @@
     ]
 }{
     \end{questions}
-    \mcqfalse
+    \@mcqfalse
 }
 % set of codes to execute right after \begin{questions}
 \def\questions@start{%
@@ -231,7 +245,7 @@
         \update@question@points% move previous question's points to total exam points
     \fi%
     \restartlist{parts}% reset the part reference to (a)
-    \ifmcq% multiple choice questions have 1 point
+    \if@mcq% multiple choice questions have 1 point
         \addtocounter{questionpoints}{1}%
         \item%
     \else% short answer questions have 
@@ -280,10 +294,48 @@
     topsep=0cm,
     partopsep=0cm
 }
+% choices* gives inline list instead
+\newlist{choices*}{enumerate*}{1}
+\setlist[choices*]{
+    label=\Alph*.,
+    itemjoin=\hspace{0cm plus 1fil}
+}
 % choice
 \def\choice{%
     \item%
 }
+
+%% custom choice environments
+\newcounter{my@choice}
+\globalcounter*% prevent resetting part and subpart labels inside paracols
+
+% choices given as a table
+\newenvironment{tabularchoices}[1]{%
+    \setcounter{my@choice}{0}%
+    \begin{tabular}{#1}%
+    \renewcommand{\choice}{%
+        \stepcounter{my@choice}%
+        \makebox[1cm][l]{\Alph{my@choice}.}\ignorespaces%
+    }%
+}{%
+    \end{tabular}%
+}
+% choices with 2 columns
+\newenvironment{multicolchoices}{
+    \begin{paracol}{2}%
+    \setcounter{my@choice}{0}%
+    \renewcommand{\choice}{%
+        \do@ifmultipleof{2}{\themy@choice}{\switchcolumn*}{\switchcolumn}%
+        \stepcounter{my@choice}%
+        \makebox[1cm][l]{\Alph{my@choice}.}\ignorespaces%
+    }%
+    \switchcolumn[1]%
+}{%
+    \end{paracol}%
+}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACKGROUNDS, HEADERS AND FOOTERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \graphicspath{{source/graphics/}}
@@ -357,19 +409,6 @@
     \end{minipage}%
     \vspace{0.45cm}
 }
-% \newenvironment{infobox}[1]{%
-%     \begin{minipage}[t]{3cm}
-%         \raggedright
-%         \textbf{#1}\par
-%         \vspace{-1.5cm}\rule{2.9cm}{0.5pt}
-%     \end{minipage}
-%     \begin{minipage}[t]{12.8cm}%
-%     \raggedright%
-%     \vspace{-0.3cm}%
-% }{%
-%     \end{minipage}%
-%     \vspace{0.5cm}
-% }
 
 % list environment inside information box
 \newlist{infoitems}{itemize}{1}
