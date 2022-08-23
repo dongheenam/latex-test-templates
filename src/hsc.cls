@@ -12,7 +12,6 @@
 \pagenumbering{arabic}
 
 % load necessary packages
-\RequirePackage{amsmath,mathtools}  % useful macros and shortcuts
 \RequirePackage{tikz}               % drawing figures
 \usetikzlibrary{calc}
 
@@ -30,6 +29,7 @@
     % marginparsep=0cm
 }
 
+\RequirePackage{amsmath,mathtools}  % useful macros and shortcuts
 \RequirePackage{enumitem}           % custom lists
 \RequirePackage{fancyhdr}           % custom header and footer
 \RequirePackage{paracol}            % multiple columns
@@ -38,15 +38,14 @@
 % this requires XeTeX or LuaTeX compilers
 \iftutex
     \RequirePackage[no-math]{fontspec}
+    \defaultfontfeatures{ Ligatures=TeX }
+    % for 12pt font, only conversion we need is 1 bp = 1.00374 pt
+    \setmainfont[Scale=1.00374]{Times New Roman}
+    \setsansfont[Scale=1.00374]{Arial}
     \RequirePackage[
         warnings-off={mathtools-colon,mathtools-overbracket}
     ]{unicode-math}
-    \defaultfontfeatures{ Ligatures=TeX }
-    % for 12pt font, only conversion we need is 1 bp = 1.00374 pt
-    \setmainfont[Scale=1.00374]{TeX Gyre Termes}
-    \setsansfont[Scale=1.00374]{Arial}
-    \setmathfont[Scale=MatchLowercase]{TeX Gyre Termes Math}
-    \setmathrm[Scale=MatchLowercase]{TeX Gyre Termes Math}
+    \setmathfont[Scale=1.00374]{STIX Two Math}
 % if LaTeX or pdfLaTeX are used, use TX fonts for text and Maths
 \else
     \ClassWarning{quiz}{XeTeX or LuaTeX not used. TX fonts will be loaded instead of Arial and TeX Gyre Termes.}
