@@ -147,6 +147,7 @@
 \def\recordquestionpoints{\@toaux{points@q\thequestion}{\thequestionpoints}}
 
 \AtEndDocument{% update the points one last time
+    \update@section@points% record and update the points for the last section
     \@toaux{totalpoints}{\theexampoints}% the total points for the entire exam
     \@toaux{totalquestions}{\thequestion}% total number of questions
 }
