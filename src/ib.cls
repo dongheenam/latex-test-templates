@@ -236,7 +236,7 @@
 % for papers 2 and 3
 \newif\if@papertwo
 \@papertwofalse
-\def\papertwo { \@papertwotrue }
+\def\papertwo{\@papertwotrue}
 
 % page borders
 \def\pageborder{%
@@ -259,7 +259,7 @@
     \begin{tikzpicture}[remember picture, overlay]%
         \node[anchor=east,inner sep=0pt] at (current page.east) {\includegraphics{binding-right.pdf}};%
     \end{tikzpicture}%
-\else\fi%
+\fi%
 }
 % logos
 \newif\if@useiblogos

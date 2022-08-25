@@ -447,6 +447,7 @@
 
 % title for Section 2
 \newcommand\sectiontwotitle{%
+    \do@examsection% section break
     % geometry for section two title
     \newgeometry{
         asymmetric, % marginpar is always on the right
@@ -483,7 +484,6 @@
     }
     \normalfont%
     \pagestyle{sectiontwobody}
-    \do@examsection% section break
 }
 
 
@@ -533,13 +533,13 @@
 
 % insert blank page
 \def\blankpage{%
+    \clearpage
     \hspace{0cm}
     \vfill
     \begin{center}
         BLANK PAGE
     \end{center}
     \vfill
-    \clearpage
 }
 
 % extra writing space for section 2
