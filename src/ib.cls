@@ -38,13 +38,18 @@
 % this requires XeTeX or LuaTeX compilers
 \iftutex
     \RequirePackage[no-math]{fontspec}
+    \defaultfontfeatures{ Ligatures=TeX }
+    \setmainfont[Scale=1.00833333]{Arial}
     \RequirePackage[
         warnings-off={mathtools-colon,mathtools-overbracket}
     ]{unicode-math}
-    \defaultfontfeatures{ Ligatures=TeX }
-    \setmainfont[Scale=1.00833333]{Arial}
-    \setmathfont[Scale=MatchUppercase]{TeX Gyre Termes Math}
-    \setmathrm[Scale=MatchUppercase]{TeX Gyre Termes Math}
+    \setmathfont[Scale=1.12]{STIX Two Math}
+    % load greek symbols from TeX Gyre instead
+    \setmathfont[Scale=1.12, 
+        range={up/{greek,Greek},it/{greek,Greek}, 
+        bfup/{greek,Greek},bfit/{greek,Greek}}
+    ]{TeX Gyre Termes Math}
+    \setmathrm[Scale=1.12]{Times New Roman}
 % if LaTeX or pdfLaTeX are used, use TX fonts for text and Maths
 \else
     \ClassWarning{quiz}{XeTeX or LuaTeX not used. TX fonts will be loaded instead of Arial and TeX Gyre Termes.}
@@ -287,12 +292,12 @@
     \ifnum\thepage<\totalpages%
         \textbf{Turn over}%
     \else\ifnum\thepage=\totalpages%
-        \if@papertwo\textbf{END OF QUESTIONS}\else\textbf{END OF EXAM}\fi%
+        \textbf{END OF EXAM}%
     \fi\fi%
 }
 \def\plainfooterRE{%
     \ifnum\thepage=\totalpages%
-        \if@papertwo\textbf{END OF QUESTIONS}\else\textbf{END OF EXAM}\fi%
+        \textbf{END OF EXAM}%
     \fi%
 }
 \def\plainheader{%
