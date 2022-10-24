@@ -36,18 +36,24 @@
 % this requires XeTeX or LuaTeX compilers
 \iftutex
     \RequirePackage[no-math]{fontspec}
+    \defaultfontfeatures{ Ligatures=TeX }
+    \setmainfont[Scale=1.00833333]{Arial}
     \RequirePackage[
         warnings-off={mathtools-colon,mathtools-overbracket}
     ]{unicode-math}
-    \defaultfontfeatures{ Ligatures=TeX }
-    \setmainfont[Scale=1.00833333]{Arial}
-    \setmathfont[Scale=MatchUppercase]{TeX Gyre Termes Math}
-    \setmathrm[Scale=MatchUppercase]{TeX Gyre Termes Math}
+    \setmathfont[Scale=1.12]{STIX Two Math}
+    % load greek symbols from TeX Gyre instead
+    \setmathfont[Scale=1.18, 
+        range={up/{latin,Latin,greek,Greek},it/{latin,Latin,greek,Greek}, 
+        bfup/{latin,Latin,greek,Greek},bfit/{latin,Latin,greek,Greek}}
+    ]{TeX Gyre Termes Math}
+    \setmathrm[Scale=1.12]{Times New Roman}
 % if LaTeX or pdfLaTeX are used, use TX fonts for text and Maths
 \else
-    \ClassWarning{quiz}{XeLaTeX or LuaLaTeX not used. TX fonts will be loaded instead of Arial and TeX Gyre Termes.}
+    \ClassWarning{quiz}{XeTeX or LuaTeX not used. TX fonts will be loaded instead of Arial and TeX Gyre Termes.}
     \RequirePackage[utf8]{inputenc}
-    \RequirePackage{newtxtext,newtxmath}
+    \RequirePackage[scaled=1.00833333]{newtxtext}
+    \RequirePackage[scaled=1.00833333]{newtxmath} 
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MACROS FOR LOCAL USE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
