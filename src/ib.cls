@@ -44,10 +44,10 @@
         warnings-off={mathtools-colon,mathtools-overbracket}
     ]{unicode-math}
     \setmathfont[Scale=1.12]{STIX Two Math}
-    % load greek symbols from TeX Gyre instead
-    \setmathfont[Scale=1.12, 
-        range={up/{greek,Greek},it/{greek,Greek}, 
-        bfup/{greek,Greek},bfit/{greek,Greek}}
+    % load latin and greek symbols from TeX Gyre instead
+    \setmathfont[Scale=1.18, 
+        range={up/{latin,Latin,greek,Greek},it/{latin,Latin,greek,Greek}, 
+        bfup/{latin,Latin,greek,Greek},bfit/{latin,Latin,greek,Greek}}
     ]{TeX Gyre Termes Math}
     \setmathrm[Scale=1.12]{Times New Roman}
 % if LaTeX or pdfLaTeX are used, use TX fonts for text and Maths

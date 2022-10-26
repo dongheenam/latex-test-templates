@@ -46,11 +46,12 @@
         warnings-off={mathtools-colon,mathtools-overbracket}
     ]{unicode-math}
     \setmathfont[Scale=1.00374]{STIX Two Math}
-    % load greek symbols from TeX Gyre instead
-    \setmathfont[Scale=1.00374, 
-        range={up/{greek,Greek},it/{greek,Greek}, 
-        bfup/{greek,Greek},bfit/{greek,Greek}}
+    % load latin and greek symbols from TeX Gyre instead
+    \setmathfont[Scale=1, 
+        range={up/{latin,Latin,greek,Greek},it/{latin,Latin,greek,Greek}, 
+        bfup/{latin,Latin,greek,Greek},bfit/{latin,Latin,greek,Greek}}
     ]{TeX Gyre Termes Math}
+    \setmathrm[Scale=1.00374]{Times New Roman}
 % if LaTeX or pdfLaTeX are used, use TX fonts for text and Maths
 \else
     \ClassWarning{quiz}{XeTeX or LuaTeX not used. TX fonts will be loaded instead of Arial and TeX Gyre Termes.}
@@ -370,6 +371,7 @@
 }
 % section 1
 \fancypagestyle{sectionone}{
+    \fancyfootoffset[r]{0cm}
     \fancyfoot[C]{-- {\thepage} --}
 }
 % section 2
@@ -539,6 +541,9 @@
 % insert blank page
 \def\blankpage{%
     \clearpage
+    % use section one styling
+    \restoregeometry
+    \pagestyle{sectionone}
     \hspace{0cm}
     \vfill
     \begin{center}

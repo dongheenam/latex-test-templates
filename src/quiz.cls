@@ -42,7 +42,7 @@
         warnings-off={mathtools-colon,mathtools-overbracket}
     ]{unicode-math}
     \setmathfont[Scale=1.12]{STIX Two Math}
-    % load greek symbols from TeX Gyre instead
+    % load latin and greek symbols from TeX Gyre instead
     \setmathfont[Scale=1.18, 
         range={up/{latin,Latin,greek,Greek},it/{latin,Latin,greek,Greek}, 
         bfup/{latin,Latin,greek,Greek},bfit/{latin,Latin,greek,Greek}}
