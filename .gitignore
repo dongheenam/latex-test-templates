@@ -2,9 +2,10 @@
 src/graphics/schoollogo*
 src/graphics/iblogo_?.pdf
 
-## local settings
+## Local files
 .vscode
-
+*.ps1
+.DS_Store
 
 ###### .gitignore setup for a TeX repository
 
